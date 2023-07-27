@@ -20,13 +20,13 @@ modules:
       enable: false
       handshakeTimeout: 30
       readDeadline: 15
-      server: 10.0.2.2:10001
+      server: 192.168.0.121:10001
       writeDeadline: 15
     rotateCertificates: true
     tlsCaFile: /etc/kubeedge/ca/rootCA.crt
     tlsCertFile: /etc/kubeedge/certs/server.crt
     tlsPrivateKeyFile: /etc/kubeedge/certs/server.key
-    token: 29f3695e0b33651878b3dfd9e9c553dc58ba7a1b1a464291d4c6fcd59e51c6cd.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODkyMjI0OTV9.WSP-Eqm8-BsP10zEHpRz-IzIRBitrxdpRg9smVZRkqM
+    token: ed2c4e0a30e361ea646ef9fb90a071ee30d1e02034a3301c7f54d973699ed16e.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTA1MTgwMzB9.8bnn2yV8rm-76VuECLMHVu2AF5Rc_mJdw8DE6K-a4C0
     websocket:
       enable: true
       handshakeTimeout: 30
@@ -34,7 +34,7 @@ modules:
       server: 10.226.76.227:10000
       writeDeadline: 15
   edgeStream:
-    enable: false
+    enable: true
     handshakeTimeout: 30
     readDeadline: 15
     server: 10.226.76.227:10004
@@ -50,7 +50,7 @@ modules:
     dockerEndpoint: unix:///var/run/docker.sock
     dockershimRootDirectory: /var/lib/dockershim
     enable: true
-    hostnameOverride: kubeedge
+    hostnameOverride: default-edge-node
     imagePullProgressDeadline: 1m0s
     kubeConfig: /etc/kubeedge/config/kubeconfig
     masterServiceNamespace: default
@@ -58,7 +58,7 @@ modules:
     maxPerPodContainerCount: 1
     minimumGCAge: 0s
     networkPluginMTU: 1500
-    nodeIP: 10.0.2.2
+    nodeIP: 192.168.0.121
     nonMasqueradeCidr: 10.0.0.0/8
     podSandboxImage: kubeedge/pause:3.1
     registerNode: true

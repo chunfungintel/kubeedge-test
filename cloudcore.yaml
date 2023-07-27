@@ -33,8 +33,14 @@ modules:
     enable: true
     streamPort: 10003
     tunnelPort: 10004
+    tlsStreamCAFile: /etc/kubeedge/ca/streamCA.crt
+    tlsStreamCertFile: /etc/kubeedge/certs/stream.crt
+    tlsStreamPrivateKeyFile: /etc/kubeedge/certs/stream.key
+    tlsTunnelCAFile: /etc/kubeedge/ca/rootCA.crt
+    tlsTunnelCertFile: /etc/kubeedge/certs/server.crt
+    tlsTunnelPrivateKeyFile: /etc/kubeedge/certs/server.key
   dynamicController:
-    enable: false
+    enable: true
   router:
     enable: false
   iptablesManager:
