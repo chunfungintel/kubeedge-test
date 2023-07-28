@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: game-demo
+data:
+  player_initial_lives: "3"
+  ui_properties_file_name: "user-interface.properties"
+  game.properties: |
+    enemy.types=aliens,monsters
+    player.maximum-lives=5
+  user-interface.properties: |
+    color.good=purple
+    color.bad=yellow
+    allow.textmode=true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu-deployment
+  labels:
+    app: ubuntu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ubuntu
+  template:
+    metadata:
+      labels:
+        app: ubuntu
+    spec:
+      containers:
+      - name: ubuntu
+        image: ubuntu:22.04
+        ports:
+        - containerPort: 80
+        #command: ["sleep"]
+        #args: ["infinity"]
+        command:
+        - bash
+        - -c
+        - |
+          while true; do echo $RANDOM; sleep 10; done
+#        env:
+#          - name: PLAYER_INITIAL_LIVES
+#            valueFrom:
+#              configMapKeyRef:
+#                name: game-demo
+#                key: player_initial_livesw
+#          - name: UI_PROPERTIES_FILE_NAME
+#            valueFrom:
+#              configMapKeyRef:
+#                name: game-demo
+#                key: ui_properties_file_name
+#        volumeMounts:
+#        - name: config
+#          mountPath: "/etc/testconfig"
+#          readOnly: true
+#      volumes:
+#      - name: config
+#        configMap:
+#          name: game-demo
+#          items:
+#          - key: "game.properties"
+#            path: "game.properties"
+#          - key: "user-interface.properties"
+#            path: "user-interface.properties"
