@@ -40,28 +40,30 @@ spec:
         - bash
         - -c
         - |
+          echo PLAYER_INITIAL_LIVES: ${PLAYER_INITIAL_LIVES};
+          echo UI_PROPERTIES_FILE_NAME: ${UI_PROPERTIES_FILE_NAME};
           while true; do echo $RANDOM; sleep 10; done
-#        env:
-#          - name: PLAYER_INITIAL_LIVES
-#            valueFrom:
-#              configMapKeyRef:
-#                name: game-demo
-#                key: player_initial_livesw
-#          - name: UI_PROPERTIES_FILE_NAME
-#            valueFrom:
-#              configMapKeyRef:
-#                name: game-demo
-#                key: ui_properties_file_name
-#        volumeMounts:
-#        - name: config
-#          mountPath: "/etc/testconfig"
-#          readOnly: true
-#      volumes:
-#      - name: config
-#        configMap:
-#          name: game-demo
-#          items:
-#          - key: "game.properties"
-#            path: "game.properties"
-#          - key: "user-interface.properties"
-#            path: "user-interface.properties"
+        env:
+          - name: PLAYER_INITIAL_LIVES
+            valueFrom:
+              configMapKeyRef:
+                name: game-demo
+                key: player_initial_lives
+          - name: UI_PROPERTIES_FILE_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: game-demo
+                key: ui_properties_file_name
+        volumeMounts:
+        - name: config
+          mountPath: "/etc/testconfig"
+          readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          name: game-demo
+          items:
+          - key: "game.properties"
+            path: "game.properties"
+          - key: "user-interface.properties"
+            path: "user-interface.properties"
